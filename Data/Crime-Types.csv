@@ -1,0 +1,73 @@
+year,crime_type,count
+2011,Violent,4818
+2011,Property,6070
+2011,White Collar,1784
+2011,Drug,2755
+2011,Public Order,3108
+2011,Other,1228
+2012,Violent,4812
+2012,Property,6727
+2012,White Collar,1631
+2012,Drug,2701
+2012,Public Order,3230
+2012,Other,1604
+2013,Violent,5294
+2013,Property,7475
+2013,White Collar,1192
+2013,Drug,3338
+2013,Public Order,3510
+2013,Other,1432
+2014,Violent,6071
+2014,Property,7523
+2014,White Collar,1190
+2014,Drug,3371
+2014,Public Order,3613
+2014,Other,1341
+2015,Violent,6154
+2015,Property,7993
+2015,White Collar,1982
+2015,Drug,3344
+2015,Public Order,3586
+2015,Other,1330
+2016,Violent,5957
+2016,Property,8530
+2016,White Collar,1746
+2016,Drug,4090
+2016,Public Order,4307
+2016,Other,1331
+2017,Violent,6690
+2017,Property,8837
+2017,White Collar,2416
+2017,Drug,3509
+2017,Public Order,4621
+2017,Other,1488
+2018,Violent,7204
+2018,Property,9252
+2018,White Collar,1665
+2018,Drug,3772
+2018,Public Order,4693
+2018,Other,2094
+2019,Violent,7595
+2019,Property,9593
+2019,White Collar,2304
+2019,Drug,3453
+2019,Public Order,4722
+2019,Other,2161
+2020,Violent,7708
+2020,Property,10592
+2020,White Collar,2593
+2020,Drug,3925
+2020,Public Order,4832
+2020,Other,1632
+2021,Violent,8240
+2021,Property,9949
+2021,White Collar,2080
+2021,Drug,4452
+2021,Public Order,5310
+2021,Other,2156
+2022,Violent,8631
+2022,Property,10473
+2022,White Collar,2198
+2022,Drug,4757
+2022,Public Order,4545
+2022,Other,2362
