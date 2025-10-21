@@ -41,7 +41,7 @@
         {
           "name": "base-grey-no-data",
           "data": {
-            "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/JSON/Suburbs_GDA2020.geojson",
+            "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Suburbs_GDA2020.geojson",
             "format": {"type": "json", "property": "features"}
           },
           "transform": [
@@ -60,7 +60,7 @@
         {
           "name": "crime-colored-overlay",
           "data": {
-            "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/JSON/Suburbs_GDA2020.geojson",
+            "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Suburbs_GDA2020.geojson",
             "format": {"type": "json", "property": "features"}
           },
           "transform": [
@@ -69,7 +69,7 @@
               "lookup": "properties.suburb",
               "from": {
                 "data": {
-                  "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/Data/Week10CSV.csv"
+                  "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Week10CSV.csv"
                 },
                 "key": "suburb",
                 "fields": ["crime_count", "year", "suburb"]
@@ -106,7 +106,7 @@
       "width": 900,
       "height": 320,
       "data": {
-        "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/Data/Week10CSV.csv"
+        "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Week10CSV.csv"
       },
       "transform": [
         {"filter": "datum.year >= 2011 && datum.year <= 2022"},
