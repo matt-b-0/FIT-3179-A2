@@ -12,7 +12,7 @@
       "value": 60000,
       "bind": {
         "input": "range",
-        "min": 12000,
+        "min": 8000,
         "max": 100000,
         "step": 500,
         "name": "Zoom: "
@@ -20,7 +20,7 @@
     }
   ],
 
-  "vconcat": [
+  "hconcat": [
     {
       "title": "South Australia Crime by Suburb",
       "width": 900,
@@ -28,7 +28,7 @@
       "view": {"stroke": null},
       "projection": {
         "type": "equirectangular",
-        "center": [138.6, -34.9],
+        "center": [138.2, -34.9],
         "scale": {"expr": "zoom_level"}
       },
       "layer": [
@@ -41,7 +41,7 @@
         {
           "name": "base-grey-no-data",
           "data": {
-            "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/JSON/Suburbs_GDA2020.geojson",
+            "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Suburbs_GDA2020.geojson",
             "format": {"type": "json", "property": "features"}
           },
           "transform": [
@@ -60,7 +60,7 @@
         {
           "name": "crime-colored-overlay",
           "data": {
-            "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/JSON/Suburbs_GDA2020.geojson",
+            "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Suburbs_GDA2020.geojson",
             "format": {"type": "json", "property": "features"}
           },
           "transform": [
@@ -69,11 +69,12 @@
               "lookup": "properties.suburb",
               "from": {
                 "data": {
-                  "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/Data/Week10CSV.csv"
+                  "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Week10CSV.csv"
                 },
                 "key": "suburb",
-                "fields": ["crime_count", "year", "suburb"]
-              }
+                "fields": ["crime_count", "year"]
+              },
+              "as": ["crime_count", "year"]
             },
             {"filter": "isValid(datum.crime_count) && datum.year == Year"},
             {"calculate": "datum.crime_count", "as": "crime_count_filled"}
@@ -84,10 +85,11 @@
               "field": "crime_count_filled",
               "type": "quantitative",
               "title": "Number of Crimes",
-              "scale": {"scheme": "reds", "domainMin": 0}
+              "scale": {"scheme": "reds", "domainMin": 0},
+              "legend": {"orient": "left", "titleLimit": 200, "offset": 10}
             },
             "tooltip": [
-              {"field": "suburb", "type": "nominal", "title": "Suburb"},
+              {"field": "properties.suburb", "type": "nominal", "title": "Suburb"},
               {
                 "field": "crime_count_filled",
                 "type": "quantitative",
@@ -102,38 +104,49 @@
     },
 
     {
-      "title": "Top 5 Suburbs by Total Crimes (2011–2022)",
-      "width": 900,
-      "height": 320,
+      "title": "Top 5 Suburbs by Crimes (Selected Year)",
+      "width": 450,
+      "height": 700,
       "data": {
-        "url": "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/Data/Week10CSV.csv"
+        "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Week10CSV.csv"
       },
       "transform": [
-        {"filter": "datum.year >= 2011 && datum.year <= 2022"},
+        {"filter": "datum.year == Year"},
+        {"filter": "lower(datum.suburb) != 'not disclosed'"},
         {
-          "aggregate": [{"op": "sum", "field": "crime_count", "as": "total_crimes"}],
+          "aggregate": [
+            {"op": "sum", "field": "crime_count", "as": "total_crimes"}
+          ],
           "groupby": ["suburb"]
         },
-        {"window": [{"op": "rank", "as": "rank"}], "sort": [{"field": "total_crimes", "order": "descending"}]},
+        {
+          "window": [{"op": "rank", "as": "rank"}],
+          "sort": [{"field": "total_crimes", "order": "descending"}]
+        },
         {"filter": "datum.rank <= 5"}
       ],
       "mark": {"type": "bar", "color": "#d73027"},
       "encoding": {
         "x": {
+          "field": "total_crimes",
+          "type": "quantitative",
+          "title": "Total Crimes (Selected Year)"
+        },
+        "y": {
           "field": "suburb",
           "type": "nominal",
           "title": "Suburb",
-          "sort": "-y",
-          "axis": {"labelAngle": 0, "labelFontSize": 12}
-        },
-        "y": {
-          "field": "total_crimes",
-          "type": "quantitative",
-          "title": "Total Crimes (2011–2022)"
+          "sort": "-x",
+          "axis": {"labelFontSize": 12}
         },
         "tooltip": [
           {"field": "suburb", "type": "nominal", "title": "Suburb"},
-          {"field": "total_crimes", "type": "quantitative", "title": "Total Crimes (2011–2022)", "format": ","}
+          {
+            "field": "total_crimes",
+            "type": "quantitative",
+            "title": "Total Crimes (Selected Year)",
+            "format": ","
+          }
         ]
       }
     }
