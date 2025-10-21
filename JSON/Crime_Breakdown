@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Adelaide Crime Breakdown by Type (2011–2022)",
+  "width": 800,
+  "height": 400,
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Crime-Types.csv"
+  },
+
+  "params": [
+    {
+      "name": "selected_type",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "options": ["All", "Violent", "Property", "White Collar", "Drug", "Public Order", "Other"],
+        "labels": ["All Types", "Violent", "Property", "White Collar", "Drug", "Public Order", "Other"],
+        "name": "Filter Crime Type: "
+      }
+    }
+  ],
+
+  "transform": [
+    {"filter": "selected_type == 'All' || datum.crime_type == selected_type"},
+    {
+      "joinaggregate": [{"op": "sum", "field": "count", "as": "year_total"}],
+      "groupby": ["year"]
+    },
+    {"calculate": "datum.count / datum.year_total", "as": "percent_of_total"}
+  ],
+
+  "mark": {"type": "bar"},
+
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {"labelAngle": 0}
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "count",
+      "type": "quantitative",
+      "title": "Number of Crimes"
+    },
+    "color": {
+      "field": "crime_type",
+      "type": "nominal",
+      "title": "Crime Type",
+      "scale": {"scheme": "reds"}
+    },
+    "tooltip": [
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "crime_type", "type": "nominal", "title": "Crime Type"},
+      {
+        "aggregate": "sum",
+        "field": "count",
+        "type": "quantitative",
+        "title": "Crimes (Absolute)",
+        "format": ","
+      },
+      {
+        "aggregate": "sum",
+        "field": "percent_of_total",
+        "type": "quantitative",
+        "title": "Share of Year’s Total",
+        "format": ".1%"
+      }
+    ]
+  }
+}

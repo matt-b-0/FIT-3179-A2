@@ -1,0 +1,84 @@
+/* === Base Page Layout === */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f3f7fc;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Fixed-width container */
+main {
+  width: 1100px;
+  max-width: 95%;
+  background-color: #f8faff;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 2em 0;
+}
+
+/* === Header === */
+header {
+  background: linear-gradient(120deg, #004aad, #0077cc);
+  color: white;
+  text-align: center;
+  padding: 2.5em 1em;
+  border-bottom: 5px solid #003366;
+}
+
+h1 {
+  margin-bottom: 0.3em;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+/* === Section Bubbles === */
+section {
+  padding: 2em 10%;
+  margin: 2em auto;
+  background: white;
+  border-radius: 25px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* === Titles & Paragraphs === */
+h3 {
+  color: #004aad;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.05em;
+}
+
+/* === Embedded Graphs === */
+iframe {
+  display: block;
+  margin: 1em auto;
+  border-radius: 15px;
+  border: none;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  background-color: #e8eef5;
+  padding: 1.2em 0;
+  font-size: 0.9em;
+  border-top: 2px solid #cdd7e2;
+}

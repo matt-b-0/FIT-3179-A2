@@ -1,51 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>South Australia Crime — Vega-Lite</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Vega / Vega-Lite / Vega-Embed (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0" defer></script>
-
-  <!-- Optional: your site styles -->
-  <link rel="stylesheet" href="css/styles.css" />
-
-  <style>
-    /* Simple responsive container */
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
-    h1 { font-size: 1.25rem; margin: 0 0 1rem; }
-    #viz { min-height: 500px; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>South Australia Crime Visualisation | Matthew Brasacchio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
-    <h1>South Australia Crime — Interactive Map & Top 5 Suburbs</h1>
-    <div id="viz"></div>
-  </div>
+  <main>
+    <header>
+      <h1>South Australia Crime Visualisation (2011–2022)</h1>
+      <h2>By Matthew Brasacchio | FIT3179 Data Visualisation</h2>
+    </header>
 
-  <script>
-    // 👉 Replace this with the raw URL to your Vega-Lite JSON spec in your repo
-    // For example:
-    // const specUrl = "https://raw.githubusercontent.com/matt-b-0/Week-10-Homework/main/json/sa_crime_map_and_top5.vl.json";
-    const specUrl = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/WK10HW.json";
+    <section class="intro">
+      <p>
+        This webpage explores crime distribution and category trends across South Australia from 
+        2011 to 2022. It uses multiple Vega-Lite visualisations to reveal both spatial patterns 
+        and changes in crime composition over time.
+      </p>
+    </section>
 
-    // Wait for the libraries to load (since we used 'defer')
-    window.addEventListener('DOMContentLoaded', () => {
-      vegaEmbed('#viz', specUrl, {
-        actions: { export: true, source: true, compiled: false, editor: true }, // toolbar options
-        renderer: 'canvas' // 'svg' also works; 'canvas' is faster for big maps
-      }).then(res => {
-        // You can access the Vega View instance via res.view if needed:
-        // res.view.addSignalListener('Year', (name, value) => console.log('Year changed to', value));
-      }).catch(err => {
-        console.error('Vega-Embed error:', err);
-        document.querySelector('#viz').innerHTML = "<p>Failed to load visualization. Check the spec URL and CORS.</p>";
-      });
-    });
-  </script>
+    <!-- === VISUALISATION 1: MAP + TOP 5 BAR (HCONCAT) === -->
+    <section class="vis">
+      <h3>Geographic Distribution and Most Affected Suburbs</h3>
+      <p>
+        The visualisation below combines a choropleth map with a bar chart to show where 
+        crime is most concentrated and which suburbs consistently experience the highest 
+        crime rates. Adjust the year slider to explore different time periods.
+      </p>
+
+      <iframe 
+        src="https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/WK10HW.json" 
+        width="900" 
+        height="800" 
+        frameborder="0">
+      </iframe>
+    </section>
+
+    <!-- === VISUALISATION 2: STACKED BAR CHART === -->
+    <section class="vis">
+      <h3>Crime Composition by Category Over Time</h3>
+      <p>
+        This stacked bar chart illustrates how different types of crime have contributed 
+        to total incidents each year. It highlights both long-term shifts and periods of 
+        relative stability within the dataset.
+      </p>
+
+      <iframe 
+        src="https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Breakdown.json" 
+        width="900" 
+        height="600" 
+        frameborder="0">
+      </iframe>
+    </section>
+
+    <section class="conclusion">
+      <h3>Conclusion</h3>
+      <p>
+        Crime distribution is strongly influenced by population density, with urban centres 
+        such as Adelaide showing the highest incident counts. The temporal analysis reveals 
+        evolving trends across crime types, helping identify areas where preventative 
+        strategies may be most effective.
+      </p>
+    </section>
+
+    <footer>
+      <p>Data Source: South Australia Police | Visualisations created using Vega-Lite</p>
+    </footer>
+  </main>
 </body>
 </html>
