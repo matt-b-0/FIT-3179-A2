@@ -4,8 +4,8 @@
   "hconcat": [
     {
       "title": "2011 — Crime % by Age Group",
-      "width": 270,
-      "height": 300,
+      "width": 230,
+      "height": 250,
       "data": {
         "values": [
           {"Age": "Under 18", "Crime": "Violent", "Percent": 8},
@@ -41,7 +41,7 @@
         ]
       },
       "transform": [
-        {"calculate": "datum.Percent * 300", "as": "Crimes"} 
+        {"calculate": "datum.Percent * 300", "as": "Crimes"}
       ],
       "mark": "rect",
       "encoding": {
@@ -58,8 +58,8 @@
     },
     {
       "title": "2016 — Crime % by Age Group",
-      "width": 270,
-      "height": 300,
+      "width": 230,
+      "height": 250,
       "data": {
         "values": [
           {"Age": "Under 18", "Crime": "Violent", "Percent": 12},
@@ -112,8 +112,8 @@
     },
     {
       "title": "2022 — Crime % by Age Group",
-      "width": 270,
-      "height": 300,
+      "width": 230,
+      "height": 250,
       "data": {
         "values": [
           {"Age": "Under 18", "Crime": "Violent", "Percent": 18},
@@ -170,4 +170,3 @@
     "legend": {"titleFontSize": 13, "labelFontSize": 12}
   }
 }
- 
