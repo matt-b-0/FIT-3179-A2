@@ -1,172 +1,142 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Crime distribution by age group and category across 2011, 2016, and 2022. Highlights rising youth crime over time.",
-  "hconcat": [
-    {
-      "title": "2011 — Crime % by Age Group",
-      "width": 180,
-      "height": 200,
-      "data": {
-        "values": [
-          {"Age": "Under 18", "Crime": "Violent", "Percent": 8},
-          {"Age": "Under 18", "Crime": "Property", "Percent": 10},
-          {"Age": "Under 18", "Crime": "Public Order", "Percent": 7},
-          {"Age": "Under 18", "Crime": "Drug", "Percent": 4},
-          {"Age": "Under 18", "Crime": "White Collar", "Percent": 1},
-          {"Age": "Under 18", "Crime": "Other", "Percent": 2},
-          {"Age": "18–25", "Crime": "Violent", "Percent": 12},
-          {"Age": "18–25", "Crime": "Property", "Percent": 14},
-          {"Age": "18–25", "Crime": "Public Order", "Percent": 9},
-          {"Age": "18–25", "Crime": "Drug", "Percent": 7},
-          {"Age": "18–25", "Crime": "White Collar", "Percent": 2},
-          {"Age": "18–25", "Crime": "Other", "Percent": 3},
-          {"Age": "26–40", "Crime": "Violent", "Percent": 22},
-          {"Age": "26–40", "Crime": "Property", "Percent": 23},
-          {"Age": "26–40", "Crime": "Public Order", "Percent": 18},
-          {"Age": "26–40", "Crime": "Drug", "Percent": 14},
-          {"Age": "26–40", "Crime": "White Collar", "Percent": 9},
-          {"Age": "26–40", "Crime": "Other", "Percent": 8},
-          {"Age": "41–60", "Crime": "Violent", "Percent": 13},
-          {"Age": "41–60", "Crime": "Property", "Percent": 10},
-          {"Age": "41–60", "Crime": "Public Order", "Percent": 8},
-          {"Age": "41–60", "Crime": "Drug", "Percent": 5},
-          {"Age": "41–60", "Crime": "White Collar", "Percent": 5},
-          {"Age": "41–60", "Crime": "Other", "Percent": 4},
-          {"Age": "60+", "Crime": "Violent", "Percent": 2},
-          {"Age": "60+", "Crime": "Property", "Percent": 2},
-          {"Age": "60+", "Crime": "Public Order", "Percent": 2},
-          {"Age": "60+", "Crime": "Drug", "Percent": 1},
-          {"Age": "60+", "Crime": "White Collar", "Percent": 1},
-          {"Age": "60+", "Crime": "Other", "Percent": 1}
-        ]
-      },
-      "transform": [
-        {"calculate": "datum.Percent * 300", "as": "Crimes"} 
-      ],
-      "mark": "rect",
-      "encoding": {
-        "x": {"field": "Age", "type": "nominal", "title": "Age Group", "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"], "axis": {"labelAngle": 0}},
-        "y": {"field": "Crime", "type": "nominal", "title": "Crime Type", "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]},
-        "color": {"field": "Percent", "type": "quantitative", "title": "% Total Crimes", "scale": {"scheme": "reds"}},
-        "tooltip": [
-          {"field": "Age"},
-          {"field": "Crime"},
-          {"field": "Percent", "format": ".1f", "title": "Percentage of Crimes"},
-          {"field": "Crimes", "format": ",", "title": "Estimated Crimes"}
-        ]
-      }
-    },
-    {
-      "title": "2016 — Crime % by Age Group",
-      "width": 180,
-      "height": 200,
-      "data": {
-        "values": [
-          {"Age": "Under 18", "Crime": "Violent", "Percent": 12},
-          {"Age": "Under 18", "Crime": "Property", "Percent": 14},
-          {"Age": "Under 18", "Crime": "Public Order", "Percent": 8},
-          {"Age": "Under 18", "Crime": "Drug", "Percent": 5},
-          {"Age": "Under 18", "Crime": "White Collar", "Percent": 2},
-          {"Age": "Under 18", "Crime": "Other", "Percent": 3},
-          {"Age": "18–25", "Crime": "Violent", "Percent": 16},
-          {"Age": "18–25", "Crime": "Property", "Percent": 18},
-          {"Age": "18–25", "Crime": "Public Order", "Percent": 10},
-          {"Age": "18–25", "Crime": "Drug", "Percent": 8},
-          {"Age": "18–25", "Crime": "White Collar", "Percent": 2},
-          {"Age": "18–25", "Crime": "Other", "Percent": 3},
-          {"Age": "26–40", "Crime": "Violent", "Percent": 19},
-          {"Age": "26–40", "Crime": "Property", "Percent": 20},
-          {"Age": "26–40", "Crime": "Public Order", "Percent": 16},
-          {"Age": "26–40", "Crime": "Drug", "Percent": 13},
-          {"Age": "26–40", "Crime": "White Collar", "Percent": 8},
-          {"Age": "26–40", "Crime": "Other", "Percent": 7},
-          {"Age": "41–60", "Crime": "Violent", "Percent": 9},
-          {"Age": "41–60", "Crime": "Property", "Percent": 8},
-          {"Age": "41–60", "Crime": "Public Order", "Percent": 6},
-          {"Age": "41–60", "Crime": "Drug", "Percent": 4},
-          {"Age": "41–60", "Crime": "White Collar", "Percent": 5},
-          {"Age": "41–60", "Crime": "Other", "Percent": 4},
-          {"Age": "60+", "Crime": "Violent", "Percent": 2},
-          {"Age": "60+", "Crime": "Property", "Percent": 2},
-          {"Age": "60+", "Crime": "Public Order", "Percent": 2},
-          {"Age": "60+", "Crime": "Drug", "Percent": 1},
-          {"Age": "60+", "Crime": "White Collar", "Percent": 1},
-          {"Age": "60+", "Crime": "Other", "Percent": 1}
-        ]
-      },
-      "transform": [
-        {"calculate": "datum.Percent * 300", "as": "Crimes"}
-      ],
-      "mark": "rect",
-      "encoding": {
-        "x": {"field": "Age", "type": "nominal", "title": "Age Group", "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"], "axis": {"labelAngle": 0}},
-        "y": {"field": "Crime", "type": "nominal", "title": "Crime Type", "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]},
-        "color": {"field": "Percent", "type": "quantitative", "title": "% Total Crimes", "scale": {"scheme": "reds"}},
-        "tooltip": [
-          {"field": "Age"},
-          {"field": "Crime"},
-          {"field": "Percent", "format": ".1f", "title": "Percentage of Crimes"},
-          {"field": "Crimes", "format": ",", "title": "Estimated Crimes"}
-        ]
-      }
-    },
-    {
-      "title": "2022 — Crime % by Age Group",
-      "width": 180,
-      "height": 200,
-      "data": {
-        "values": [
-          {"Age": "Under 18", "Crime": "Violent", "Percent": 18},
-          {"Age": "Under 18", "Crime": "Property", "Percent": 20},
-          {"Age": "Under 18", "Crime": "Public Order", "Percent": 12},
-          {"Age": "Under 18", "Crime": "Drug", "Percent": 7},
-          {"Age": "Under 18", "Crime": "White Collar", "Percent": 3},
-          {"Age": "Under 18", "Crime": "Other", "Percent": 4},
-          {"Age": "18–25", "Crime": "Violent", "Percent": 22},
-          {"Age": "18–25", "Crime": "Property", "Percent": 23},
-          {"Age": "18–25", "Crime": "Public Order", "Percent": 14},
-          {"Age": "18–25", "Crime": "Drug", "Percent": 10},
-          {"Age": "18–25", "Crime": "White Collar", "Percent": 3},
-          {"Age": "18–25", "Crime": "Other", "Percent": 4},
-          {"Age": "26–40", "Crime": "Violent", "Percent": 16},
-          {"Age": "26–40", "Crime": "Property", "Percent": 17},
-          {"Age": "26–40", "Crime": "Public Order", "Percent": 13},
-          {"Age": "26–40", "Crime": "Drug", "Percent": 10},
-          {"Age": "26–40", "Crime": "White Collar", "Percent": 8},
-          {"Age": "26–40", "Crime": "Other", "Percent": 6},
-          {"Age": "41–60", "Crime": "Violent", "Percent": 7},
-          {"Age": "41–60", "Crime": "Property", "Percent": 6},
-          {"Age": "41–60", "Crime": "Public Order", "Percent": 5},
-          {"Age": "41–60", "Crime": "Drug", "Percent": 3},
-          {"Age": "41–60", "Crime": "White Collar", "Percent": 4},
-          {"Age": "41–60", "Crime": "Other", "Percent": 3},
-          {"Age": "60+", "Crime": "Violent", "Percent": 2},
-          {"Age": "60+", "Crime": "Property", "Percent": 2},
-          {"Age": "60+", "Crime": "Public Order", "Percent": 2},
-          {"Age": "60+", "Crime": "Drug", "Percent": 1},
-          {"Age": "60+", "Crime": "White Collar", "Percent": 1},
-          {"Age": "60+", "Crime": "Other", "Percent": 1}
-        ]
-      },
-      "transform": [
-        {"calculate": "datum.Percent * 300", "as": "Crimes"}
-      ],
-      "mark": "rect",
-      "encoding": {
-        "x": {"field": "Age", "type": "nominal", "title": "Age Group", "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"], "axis": {"labelAngle": 0}},
-        "y": {"field": "Crime", "type": "nominal", "title": "Crime Type", "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]},
-        "color": {"field": "Percent", "type": "quantitative", "title": "% Total Crimes", "scale": {"scheme": "reds"}},
-        "tooltip": [
-          {"field": "Age"},
-          {"field": "Crime"},
-          {"field": "Percent", "format": ".1f", "title": "Percentage of Crimes"},
-          {"field": "Crimes", "format": ",", "title": "Estimated Crimes"}
-        ]
-      }
-    }
+  "description": "Percentage of total crimes by age group and category across 2011, 2016, and 2022. Highlights rising youth crime over time.",
+  "data": {
+    "values": [
+      {"Year": 2011, "Age": "Under 18", "Crime": "Violent", "Percent": 8},
+      {"Year": 2011, "Age": "Under 18", "Crime": "Property", "Percent": 10},
+      {"Year": 2011, "Age": "Under 18", "Crime": "Public Order", "Percent": 7},
+      {"Year": 2011, "Age": "Under 18", "Crime": "Drug", "Percent": 4},
+      {"Year": 2011, "Age": "Under 18", "Crime": "White Collar", "Percent": 1},
+      {"Year": 2011, "Age": "Under 18", "Crime": "Other", "Percent": 2},
+      {"Year": 2011, "Age": "18–25", "Crime": "Violent", "Percent": 12},
+      {"Year": 2011, "Age": "18–25", "Crime": "Property", "Percent": 14},
+      {"Year": 2011, "Age": "18–25", "Crime": "Public Order", "Percent": 9},
+      {"Year": 2011, "Age": "18–25", "Crime": "Drug", "Percent": 7},
+      {"Year": 2011, "Age": "18–25", "Crime": "White Collar", "Percent": 2},
+      {"Year": 2011, "Age": "18–25", "Crime": "Other", "Percent": 3},
+      {"Year": 2011, "Age": "26–40", "Crime": "Violent", "Percent": 22},
+      {"Year": 2011, "Age": "26–40", "Crime": "Property", "Percent": 23},
+      {"Year": 2011, "Age": "26–40", "Crime": "Public Order", "Percent": 18},
+      {"Year": 2011, "Age": "26–40", "Crime": "Drug", "Percent": 14},
+      {"Year": 2011, "Age": "26–40", "Crime": "White Collar", "Percent": 9},
+      {"Year": 2011, "Age": "26–40", "Crime": "Other", "Percent": 8},
+      {"Year": 2011, "Age": "41–60", "Crime": "Violent", "Percent": 13},
+      {"Year": 2011, "Age": "41–60", "Crime": "Property", "Percent": 10},
+      {"Year": 2011, "Age": "41–60", "Crime": "Public Order", "Percent": 8},
+      {"Year": 2011, "Age": "41–60", "Crime": "Drug", "Percent": 5},
+      {"Year": 2011, "Age": "41–60", "Crime": "White Collar", "Percent": 5},
+      {"Year": 2011, "Age": "41–60", "Crime": "Other", "Percent": 4},
+      {"Year": 2011, "Age": "60+", "Crime": "Violent", "Percent": 2},
+      {"Year": 2011, "Age": "60+", "Crime": "Property", "Percent": 2},
+      {"Year": 2011, "Age": "60+", "Crime": "Public Order", "Percent": 2},
+      {"Year": 2011, "Age": "60+", "Crime": "Drug", "Percent": 1},
+      {"Year": 2011, "Age": "60+", "Crime": "White Collar", "Percent": 1},
+      {"Year": 2011, "Age": "60+", "Crime": "Other", "Percent": 1},
+
+      {"Year": 2016, "Age": "Under 18", "Crime": "Violent", "Percent": 12},
+      {"Year": 2016, "Age": "Under 18", "Crime": "Property", "Percent": 14},
+      {"Year": 2016, "Age": "Under 18", "Crime": "Public Order", "Percent": 8},
+      {"Year": 2016, "Age": "Under 18", "Crime": "Drug", "Percent": 5},
+      {"Year": 2016, "Age": "Under 18", "Crime": "White Collar", "Percent": 2},
+      {"Year": 2016, "Age": "Under 18", "Crime": "Other", "Percent": 3},
+      {"Year": 2016, "Age": "18–25", "Crime": "Violent", "Percent": 16},
+      {"Year": 2016, "Age": "18–25", "Crime": "Property", "Percent": 18},
+      {"Year": 2016, "Age": "18–25", "Crime": "Public Order", "Percent": 10},
+      {"Year": 2016, "Age": "18–25", "Crime": "Drug", "Percent": 8},
+      {"Year": 2016, "Age": "18–25", "Crime": "White Collar", "Percent": 2},
+      {"Year": 2016, "Age": "18–25", "Crime": "Other", "Percent": 3},
+      {"Year": 2016, "Age": "26–40", "Crime": "Violent", "Percent": 19},
+      {"Year": 2016, "Age": "26–40", "Crime": "Property", "Percent": 20},
+      {"Year": 2016, "Age": "26–40", "Crime": "Public Order", "Percent": 16},
+      {"Year": 2016, "Age": "26–40", "Crime": "Drug", "Percent": 13},
+      {"Year": 2016, "Age": "26–40", "Crime": "White Collar", "Percent": 8},
+      {"Year": 2016, "Age": "26–40", "Crime": "Other", "Percent": 7},
+      {"Year": 2016, "Age": "41–60", "Crime": "Violent", "Percent": 9},
+      {"Year": 2016, "Age": "41–60", "Crime": "Property", "Percent": 8},
+      {"Year": 2016, "Age": "41–60", "Crime": "Public Order", "Percent": 6},
+      {"Year": 2016, "Age": "41–60", "Crime": "Drug", "Percent": 4},
+      {"Year": 2016, "Age": "41–60", "Crime": "White Collar", "Percent": 5},
+      {"Year": 2016, "Age": "41–60", "Crime": "Other", "Percent": 4},
+      {"Year": 2016, "Age": "60+", "Crime": "Violent", "Percent": 2},
+      {"Year": 2016, "Age": "60+", "Crime": "Property", "Percent": 2},
+      {"Year": 2016, "Age": "60+", "Crime": "Public Order", "Percent": 2},
+      {"Year": 2016, "Age": "60+", "Crime": "Drug", "Percent": 1},
+      {"Year": 2016, "Age": "60+", "Crime": "White Collar", "Percent": 1},
+      {"Year": 2016, "Age": "60+", "Crime": "Other", "Percent": 1},
+
+      {"Year": 2022, "Age": "Under 18", "Crime": "Violent", "Percent": 18},
+      {"Year": 2022, "Age": "Under 18", "Crime": "Property", "Percent": 20},
+      {"Year": 2022, "Age": "Under 18", "Crime": "Public Order", "Percent": 12},
+      {"Year": 2022, "Age": "Under 18", "Crime": "Drug", "Percent": 7},
+      {"Year": 2022, "Age": "Under 18", "Crime": "White Collar", "Percent": 3},
+      {"Year": 2022, "Age": "Under 18", "Crime": "Other", "Percent": 4},
+      {"Year": 2022, "Age": "18–25", "Crime": "Violent", "Percent": 22},
+      {"Year": 2022, "Age": "18–25", "Crime": "Property", "Percent": 23},
+      {"Year": 2022, "Age": "18–25", "Crime": "Public Order", "Percent": 14},
+      {"Year": 2022, "Age": "18–25", "Crime": "Drug", "Percent": 10},
+      {"Year": 2022, "Age": "18–25", "Crime": "White Collar", "Percent": 3},
+      {"Year": 2022, "Age": "18–25", "Crime": "Other", "Percent": 4},
+      {"Year": 2022, "Age": "26–40", "Crime": "Violent", "Percent": 16},
+      {"Year": 2022, "Age": "26–40", "Crime": "Property", "Percent": 17},
+      {"Year": 2022, "Age": "26–40", "Crime": "Public Order", "Percent": 13},
+      {"Year": 2022, "Age": "26–40", "Crime": "Drug", "Percent": 10},
+      {"Year": 2022, "Age": "26–40", "Crime": "White Collar", "Percent": 8},
+      {"Year": 2022, "Age": "26–40", "Crime": "Other", "Percent": 6},
+      {"Year": 2022, "Age": "41–60", "Crime": "Violent", "Percent": 7},
+      {"Year": 2022, "Age": "41–60", "Crime": "Property", "Percent": 6},
+      {"Year": 2022, "Age": "41–60", "Crime": "Public Order", "Percent": 5},
+      {"Year": 2022, "Age": "41–60", "Crime": "Drug", "Percent": 3},
+      {"Year": 2022, "Age": "41–60", "Crime": "White Collar", "Percent": 4},
+      {"Year": 2022, "Age": "41–60", "Crime": "Other", "Percent": 3},
+      {"Year": 2022, "Age": "60+", "Crime": "Violent", "Percent": 2},
+      {"Year": 2022, "Age": "60+", "Crime": "Property", "Percent": 2},
+      {"Year": 2022, "Age": "60+", "Crime": "Public Order", "Percent": 2},
+      {"Year": 2022, "Age": "60+", "Crime": "Drug", "Percent": 1},
+      {"Year": 2022, "Age": "60+", "Crime": "White Collar", "Percent": 1},
+      {"Year": 2022, "Age": "60+", "Crime": "Other", "Percent": 1}
+    ]
+  },
+  "transform": [
+    {"calculate": "datum.Percent * 300", "as": "Crimes"}
   ],
+  "facet": {"column": {"field": "Year", "type": "ordinal", "title": "Year"}},
+  "spec": {
+    "width": 200,
+    "height": 200,
+    "mark": "rect",
+    "encoding": {
+      "x": {
+        "field": "Age",
+        "type": "nominal",
+        "title": "Age Group",
+        "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"],
+        "axis": {"labelAngle": 0}
+      },
+      "y": {
+        "field": "Crime",
+        "type": "nominal",
+        "title": "Crime Type",
+        "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]
+      },
+      "color": {
+        "field": "Percent",
+        "type": "quantitative",
+        "title": "% of Total Crimes",
+        "scale": {"scheme": "reds"}
+      },
+      "tooltip": [
+        {"field": "Year"},
+        {"field": "Age"},
+        {"field": "Crime"},
+        {"field": "Percent", "format": ".1f", "title": "Percentage of Crimes"},
+        {"field": "Crimes", "format": ",", "title": "Estimated Crimes"}
+      ]
+    }
+  },
   "config": {
-    "axis": {"labelFontSize": 10, "titleFontSize": 11},
-    "legend": {"titleFontSize": 10, "labelFontSize": 10}
+    "view": {"stroke": null},
+    "axis": {"labelFontSize": 10, "titleFontSize": 12},
+    "legend": {"orient": "bottom", "titleFontSize": 13, "labelFontSize": 12}
   }
 }
