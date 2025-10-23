@@ -1,6 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
+  "autosize": {"type": "fit", "contains": "padding"},
+
   "params": [
     {
       "name": "Year",
@@ -23,7 +25,7 @@
   "hconcat": [
     {
       "title": "South Australia Crime by Suburb",
-      "width": 100,
+      "width": 600,
       "height": 500,
       "view": {"stroke": null},
       "projection": {
@@ -31,6 +33,7 @@
         "center": [138.4, -34.9],
         "scale": {"expr": "zoom_level"}
       },
+
       "layer": [
         {
           "name": "ocean-background",
@@ -86,7 +89,11 @@
               "type": "quantitative",
               "title": "Number of Crimes",
               "scale": {"scheme": "reds", "domainMin": 0},
-              "legend": {"orient": "left", "titleLimit": 200, "offset": 10}
+              "legend": {
+                "orient": "bottom",
+                "titleLimit": 200,
+                "offset": 10
+              }
             },
             "tooltip": [
               {"field": "properties.suburb", "type": "nominal", "title": "Suburb"},
@@ -105,7 +112,7 @@
 
     {
       "title": "Top 5 Suburbs by Crimes (Selected Year)",
-      "width": 50,
+      "width": 300,
       "height": 500,
       "data": {
         "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Week10CSV.csv"
