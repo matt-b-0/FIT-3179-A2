@@ -1,0 +1,47 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Top 8 South Australian Suburbs by Crime (2022)",
+  "width": 500,
+  "height": 500,
+  "background": "#f9f9f9",
+
+  "data": {
+    "values": [
+      {"Suburb": "ADELAIDE", "Crimes": 3674},
+      {"Suburb": "PORT AUGUSTA", "Crimes": 1092},
+      {"Suburb": "PORT LINCOLN", "Crimes": 999},
+      {"Suburb": "MORPHETT VALE", "Crimes": 769},
+      {"Suburb": "SALISBURY", "Crimes": 759},
+      {"Suburb": "MOUNT GAMBIER", "Crimes": 727},
+      {"Suburb": "ELIZABETH", "Crimes": 723}
+    ]
+  },
+
+  "encoding": {
+    "theta": {"field": "Suburb", "type": "nominal", "sort": null},
+    "radius": {
+      "field": "Crimes",
+      "type": "quantitative",
+      "scale": {"nice": true},
+      "title": "Crime Count"
+    },
+    "color": {"value": "#D32F2F"}
+  },
+
+  "layer": [
+    {
+      "mark": {"type": "line", "interpolate": "linear-closed", "strokeWidth": 2}
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 80},
+      "encoding": {
+        "tooltip": [
+          {"field": "Suburb", "type": "nominal"},
+          {"field": "Crimes", "type": "quantitative", "format": ","}
+        ]
+      }
+    }
+  ],
+
+  "view": {"stroke": null}
+}

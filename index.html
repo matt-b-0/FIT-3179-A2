@@ -52,6 +52,11 @@
 
       <div id="vis2" class="vis-container"></div>
     </section>
+    </section>
+      <h3>Worst Suburbs By violent Crimes</h3>
+      <div id="vis4" class="vis-container"></div>
+
+    </section>
 
     <section class="conclusion">
       <h3>Conclusion</h3>
@@ -81,6 +86,12 @@
     vegaEmbed('#vis2', specVis2, { "actions": false })
       .then(() => console.log("Stacked Bar Chart loaded"))
       .catch(console.error);
+    
+    const specVis4 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Radar.json";
+    vegaEmbed('#vis4', specVis4, { actions: false })
+      .then(() => console.log("Radar chart loaded"))
+      .catch(console.error);
+</script>
   </script>
 
 </body>
