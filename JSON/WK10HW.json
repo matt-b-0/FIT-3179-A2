@@ -23,8 +23,8 @@
   "hconcat": [
     {
       "title": "South Australia Crime by Suburb",
-      "width": 600,
-      "height": 700,
+      "width": 400,
+      "height": 500,
       "view": {"stroke": null},
       "projection": {
         "type": "equirectangular",
@@ -105,8 +105,8 @@
 
     {
       "title": "Top 5 Suburbs by Crimes (Selected Year)",
-      "width": 450,
-      "height": 700,
+      "width": 200,
+      "height": 500,
       "data": {
         "url": "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/Data/Week10CSV.csv"
       },
