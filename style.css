@@ -29,17 +29,10 @@ header {
   padding: 2.5em 1em;
   border-bottom: 5px solid #003366;
 }
+h1 { margin-bottom: 0.3em; }
+h2 { font-weight: 400; font-size: 1.1em; }
 
-h1 {
-  margin-bottom: 0.3em;
-}
-
-h2 {
-  font-weight: 400;
-  font-size: 1.1em;
-}
-
-/* === Section Bubbles === */
+/* === Section Cards === */
 section {
   padding: 2em 10%;
   margin: 2em auto;
@@ -48,31 +41,30 @@ section {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 section:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* === Titles & Paragraphs === */
-h3 {
+/* Accent titles */
+.accent-title {
+  position: relative;
+  padding-bottom: 6px;
   color: #004aad;
   margin-top: 0;
 }
-
-p {
-  font-size: 1.05em;
+.accent-title:after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 4px; width: 80px;
+  background: linear-gradient(90deg, #ff3b3b, #ff8a8a);
+  border-radius: 2px;
 }
 
-/* === Embedded Graphs === */
-iframe {
-  display: block;
-  margin: 1em auto;
-  border-radius: 15px;
-  border: none;
-  width: 100%;
-  max-width: 900px;
-}
+/* Body text */
+p { font-size: 1.05em; }
+.em-red { color: #d73027; }
 
 /* === Vega Visualisation Containers === */
 .vis-container {
@@ -80,23 +72,50 @@ iframe {
   justify-content: center;
   align-items: center;
   overflow-x: auto;
-  padding: 0; /* remove side padding inside sections */
+  padding: 0; 
   margin: 1em 0;
 }
 
-section.vis {
-  padding: 2em 3%; /* reduce section padding for more width */
+/* Tighter padding for data sections to maximize width */
+section.vis { padding: 2em 6%; }
+
+/* Flex row for radar + text */
+.vis-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;    /* wrap on small screens */
 }
 
-main {
-  max-width: 95vw; /* allow the page to grow with screen width */
+.vis-text {
+  flex: 1 1 380px;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
-/* === Footer === */
+.chart-right {
+  flex: 1 1 480px;
+  min-width: 420px;
+}
+
+/* Scroll helper for wide, faceted charts (Age × Crime) */
+.scroll-wrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Footer */
 footer {
   text-align: center;
   background-color: #e8eef5;
   padding: 1.2em 0;
   font-size: 0.9em;
   border-top: 2px solid #cdd7e2;
+}
+
+/* Small screens */
+@media (max-width: 900px) {
+  section { padding: 1.5em 6%; }
+  .accent-title:after { width: 60px; }
+  .chart-right { min-width: 320px; }
 }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>South Australia Crime Visualisation | Matthew Brasacchio</title>
 
   <!-- Vega Libraries -->
@@ -11,7 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -21,102 +21,118 @@
       <h2>By Matthew Brasacchio | FIT3179 Data Visualisation</h2>
     </header>
 
+    <!-- INTRO -->
     <section class="intro">
+      <h3 class="accent-title">What changed across a decade?</h3>
       <p>
-        This webpage explores crime distribution and category trends across South Australia from 
-        2011 to 2022. It uses multiple Vega-Lite visualisations to reveal both spatial patterns 
-        and changes in crime composition over time.
+        This dashboard explores how crime has evolved across South Australia between <b>2011</b> and <b>2022</b>. 
+        We combine <b>geography</b>, <b>category mix</b>, a comparative <b>radar</b> view, and an <b>age profile</b> to show a clear story:
+        <span class="em-red"><b>hotspots concentrate around key urban areas</b></span>, the mix leans heavily toward 
+        <b>property</b> and <b>violent</b> offences, and by 2022 we see a <span class="em-red"><b>stronger youth fingerprint</b></span>—especially in 
+        <b>violent</b> and <b>property</b> crime.
       </p>
     </section>
 
-    <!-- === VISUALISATION 1: MAP + TOP 5 BAR (HCONCAT) === -->
+    <!-- VIS 1: MAP + TOP 5 -->
     <section class="vis">
-      <h3>Geographic Distribution and Most Affected Suburbs</h3>
+      <h3 class="accent-title">Where is crime concentrated?</h3>
       <p>
-        The visualisation below combines a choropleth map with a bar chart to show where 
-        crime is most concentrated and which suburbs consistently experience the highest 
-        crime rates. Adjust the year slider to explore different time periods.
+        The map and bar chart highlight <b>suburb-level intensity</b>. Use the year slider to see how 
+        <span class="em-red"><b>Adelaide and adjacent hubs</b></span> consistently dominate incident counts, while the Top-5 list 
+        shifts as local conditions change.
       </p>
-
       <div id="vis1" class="vis-container"></div>
     </section>
 
-    <!-- === VISUALISATION 2: STACKED BAR CHART === -->
+    <!-- VIS 2: STACKED BAR (CATEGORY MIX OVER TIME) -->
     <section class="vis">
-      <h3>Crime Composition by Category Over Time</h3>
+      <h3 class="accent-title">What types of crime define the trend?</h3>
       <p>
-        This stacked bar chart illustrates how different types of crime have contributed 
-        to total incidents each year. It highlights both long-term shifts and periods of 
-        relative stability within the dataset.
+        This stacked view shows the <b>composition</b> of total incidents. Across the decade, 
+        <span class="em-red"><b>property-related</b></span> and <span class="em-red"><b>violent</b></span> offences stay dominant, while 
+        <b>public order</b> and <b>drug</b> offences fluctuate within a narrower band. The takeaway: 
+        the headline story is still driven by <b>high-volume categories</b>.
       </p>
-
       <div id="vis2" class="vis-container"></div>
     </section>
 
-    <section class="vis">
-      <h3>Worst Suburbs By violent Crimes</h3>
-      <p>
-        This radar chart compares suburbs with the highest crime rates, highlighting areas 
-        with consistently elevated levels of violent or high-impact offences. It provides 
-        a clear visual snapshot of the regions contributing most to South Australia's 
-        overall crime burden.
-      </p>
-      <div id="vis4" class="vis-container"></div>
-
+    <!-- VIS 4: RADAR (COMPOSITION COMPARISON) -->
+    <section class="vis vis-row">
+      <!-- Narrative (left) -->
+      <div class="vis-text">
+        <h3 class="accent-title">How do categories compare side-by-side?</h3>
+        <p>
+          The radar chart compares total contribution by category (e.g., <b>Property</b>, <b>Violent</b>, 
+          <b>Public Order</b>, <b>Drug</b>, <b>White Collar</b>, <b>Other</b>). Longer spokes mean a larger share.
+          In our data, <span class="em-red"><b>property</b> and <b>violent</b></span> spokes extend the furthest—clear evidence of 
+          their central role in overall incidence.
+        </p>
+        <p>
+          Note the subtle shape change across years: the polygon for <b>2022</b> stretches a little further on 
+          <span class="em-red"><b>violent</b></span> and <span class="em-red"><b>property</b></span>, reinforcing the story from the stacked bars. 
+          Meanwhile, <b>white-collar</b>, <b>drug</b>, and <b>public order</b> remain nearer the center, indicating lower relative volume.
+        </p>
+      </div>
+      <!-- Chart (right) -->
+      <div id="vis4" class="vis-container chart-right"></div>
     </section>
 
+    <!-- VIS 5: AGE × CRIME HEATMAPS -->
     <section class="vis">
-      <h3>Crime by Age Group and Category (2011–2022)</h3>
+      <h3 class="accent-title">Who is driving the change?</h3>
       <p>
-        This series of heatmaps shows how the proportion of crimes committed by different
-        age groups has changed over time. A visible increase in youth-related offences,
-        particularly in violent and property crimes, can be seen from 2011 to 2022.
+        Three heatmaps (2011, 2016, 2022) compare <b>age groups</b> against <b>crime types</b> using <b>% of total</b>. 
+        The pattern shows a <span class="em-red"><b>growing share from youth</b></span>—especially 
+        <b>Under 18</b> and <b>18–25</b>—in <b>violent</b> and <b>property</b> offences by 2022. Tooltips provide both percentage 
+        and an estimated count (based on total annual incidents) to ground the narrative with scale.
       </p>
-
-      <div id="vis5" class="vis-container"></div>
+      <div class="scroll-wrap">
+        <div id="vis5" class="vis-container" style="min-width: 1150px;"></div>
+      </div>
     </section>
 
-
+    <!-- CONCLUSION -->
     <section class="conclusion">
-      <h3>Conclusion</h3>
+      <h3 class="accent-title">So what?</h3>
       <p>
-        Crime distribution is strongly influenced by population density, with urban centres 
-        such as Adelaide showing the highest incident counts. The temporal analysis reveals 
-        evolving trends across crime types, helping identify areas where preventative 
-        strategies may be most effective.
+        Crime in South Australia remains anchored by <b>property</b> and <b>violent</b> categories and is 
+        geographically concentrated in <b>major population centres</b>. By 2022, the evidence suggests a 
+        <span class="em-red"><b>sharper youth presence</b></span>, particularly in <b>violent</b> and <b>property</b> offences. 
+        Together, these findings point to two levers: <b>place-based strategies</b> for persistent hotspots, and 
+        <b>targeted prevention</b> for younger cohorts at risk of escalation into serious harm.
       </p>
     </section>
-    
+
     <footer>
-      <p>Data Source: South Australia Police | Visualisations created using Vega-Lite</p>
+      <p>Data Source: South Australia Police &nbsp;|&nbsp; Visualisations created using Vega-Lite</p>
     </footer>
   </main>
 
   <!-- === Vega Embed Scripts === -->
   <script type="text/javascript">
-    // First visualisation — Map + Top 5 Bar
-    const specVis1 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/WK10HW.json";
-    vegaEmbed('#vis1', specVis1, { "actions": false })
-      .then(() => console.log("Map + Top 5 Bar visualisation loaded"))
-      .catch(console.error);
+    // VIS 1 — Map + Top 5 Bar
+    vegaEmbed('#vis1',
+      'https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/WK10HW.json',
+      { actions: false }
+    ).catch(console.error);
 
-    // Second visualisation — Stacked Bar Chart
-    const specVis2 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Breakdown.json";
-    vegaEmbed('#vis2', specVis2, { "actions": false })
-      .then(() => console.log("Stacked Bar Chart loaded"))
-      .catch(console.error);
-    
-    const specVis4 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Radar.json";
-    vegaEmbed('#vis4', specVis4, { actions: false })
-      .then(() => console.log("Radar chart loaded"))
-      .catch(console.error);
-    
-    const specVis5 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/AgeCrime.json";
-    vegaEmbed('#vis5', specVis5, { actions: false })
-      .then(() => console.log("Radar chart loaded"))
-      .catch(console.error);
-</script>
+    // VIS 2 — Stacked Bar Chart (Category Mix)
+    vegaEmbed('#vis2',
+      'https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Breakdown.json',
+      { actions: false }
+    ).catch(console.error);
+
+    // VIS 4 — Radar Chart (Category Comparison)
+    vegaEmbed('#vis4',
+      'https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Radar.json',
+      { actions: false }
+    ).catch(console.error);
+
+    // VIS 5 — Age × Crime Heatmaps (single file, faceted)
+    vegaEmbed('#vis5',
+      'https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/AgeCrime.json',
+      { actions: false }
+    ).catch(console.error);
   </script>
-
 </body>
 </html>
