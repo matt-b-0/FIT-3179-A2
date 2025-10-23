@@ -102,8 +102,8 @@
   ],
   "facet": {"column": {"field": "Year", "type": "ordinal", "title": "Year"}},
   "spec": {
-    "width": 200,
-    "height": 200,
+    "width": 250,
+    "height": 250,
     "mark": "rect",
     "encoding": {
       "x": {
