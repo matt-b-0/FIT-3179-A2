@@ -23,7 +23,7 @@
   "hconcat": [
     {
       "title": "South Australia Crime by Suburb",
-      "width": 900,
+      "width": 600,
       "height": 700,
       "view": {"stroke": null},
       "projection": {
