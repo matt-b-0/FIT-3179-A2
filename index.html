@@ -65,6 +65,18 @@
 
     </section>
 
+    <section class="vis">
+      <h3>Crime by Age Group and Category (2011–2022)</h3>
+      <p>
+        This series of heatmaps shows how the proportion of crimes committed by different
+        age groups has changed over time. A visible increase in youth-related offences,
+        particularly in violent and property crimes, can be seen from 2011 to 2022.
+      </p>
+
+      <div id="vis5" class="vis-container"></div>
+    </section>
+
+
     <section class="conclusion">
       <h3>Conclusion</h3>
       <p>
@@ -74,7 +86,7 @@
         strategies may be most effective.
       </p>
     </section>
-
+    
     <footer>
       <p>Data Source: South Australia Police | Visualisations created using Vega-Lite</p>
     </footer>
@@ -96,6 +108,11 @@
     
     const specVis4 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/Crime_Radar.json";
     vegaEmbed('#vis4', specVis4, { actions: false })
+      .then(() => console.log("Radar chart loaded"))
+      .catch(console.error);
+    
+    const specVis5 = "https://raw.githubusercontent.com/matt-b-0/FIT-3179-A2/main/JSON/AgeCrime.json";
+    vegaEmbed('#vis5', specVis5, { actions: false })
       .then(() => console.log("Radar chart loaded"))
       .catch(console.error);
 </script>
