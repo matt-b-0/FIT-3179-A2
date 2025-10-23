@@ -4,7 +4,7 @@
   "hconcat": [
     {
       "title": "2011 — Crime % by Age Group",
-      "width": 200,
+      "width": 180,
       "height": 200,
       "data": {
         "values": [
@@ -47,7 +47,7 @@
       "encoding": {
         "x": {"field": "Age", "type": "nominal", "title": "Age Group", "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"], "axis": {"labelAngle": 0}},
         "y": {"field": "Crime", "type": "nominal", "title": "Crime Type", "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]},
-        "color": {"field": "Percent", "type": "quantitative", "title": "% of Total Crimes", "scale": {"scheme": "reds"}},
+        "color": {"field": "Percent", "type": "quantitative", "title": "% Total Crimes", "scale": {"scheme": "reds"}},
         "tooltip": [
           {"field": "Age"},
           {"field": "Crime"},
@@ -58,7 +58,7 @@
     },
     {
       "title": "2016 — Crime % by Age Group",
-      "width": 200,
+      "width": 180,
       "height": 200,
       "data": {
         "values": [
@@ -101,7 +101,7 @@
       "encoding": {
         "x": {"field": "Age", "type": "nominal", "title": "Age Group", "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"], "axis": {"labelAngle": 0}},
         "y": {"field": "Crime", "type": "nominal", "title": "Crime Type", "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]},
-        "color": {"field": "Percent", "type": "quantitative", "title": "% of Total Crimes", "scale": {"scheme": "reds"}},
+        "color": {"field": "Percent", "type": "quantitative", "title": "% Total Crimes", "scale": {"scheme": "reds"}},
         "tooltip": [
           {"field": "Age"},
           {"field": "Crime"},
@@ -112,7 +112,7 @@
     },
     {
       "title": "2022 — Crime % by Age Group",
-      "width": 200,
+      "width": 180,
       "height": 200,
       "data": {
         "values": [
@@ -155,7 +155,7 @@
       "encoding": {
         "x": {"field": "Age", "type": "nominal", "title": "Age Group", "sort": ["Under 18", "18–25", "26–40", "41–60", "60+"], "axis": {"labelAngle": 0}},
         "y": {"field": "Crime", "type": "nominal", "title": "Crime Type", "sort": ["Violent", "Property", "Public Order", "Drug", "White Collar", "Other"]},
-        "color": {"field": "Percent", "type": "quantitative", "title": "% of Total Crimes", "scale": {"scheme": "reds"}},
+        "color": {"field": "Percent", "type": "quantitative", "title": "% Total Crimes", "scale": {"scheme": "reds"}},
         "tooltip": [
           {"field": "Age"},
           {"field": "Crime"},
@@ -166,7 +166,7 @@
     }
   ],
   "config": {
-    "axis": {"labelFontSize": 10, "titleFontSize": 13},
-    "legend": {"titleFontSize": 13, "labelFontSize": 10}
+    "axis": {"labelFontSize": 10, "titleFontSize": 11},
+    "legend": {"titleFontSize": 10, "labelFontSize": 10}
   }
 }
