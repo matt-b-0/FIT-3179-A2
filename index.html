@@ -37,9 +37,9 @@
     <section class="vis">
       <h3 class="accent-title">Where is crime concentrated?</h3>
       <p>
-        The map and bar chart highlight <b>suburb-level intensity</b>. Use the year slider to see how 
+        The map and bar chart highlight <b>suburb intensity</b>. The year slider Illustrates 
         <span class="em-red"><b>Adelaide and adjacent hubs</b></span> consistently dominate incident counts, while the Top-5 list 
-        shifts as local conditions change.
+        shifts depending on year although Adelaide is the only consistent.
       </p>
       <div id="vis1" class="vis-container"></div>
     </section>
@@ -60,12 +60,12 @@
     <section class="vis vis-row">
       <!-- Narrative (left) -->
       <div class="vis-text">
-        <h3 class="accent-title">How do categories compare side-by-side?</h3>
+        <h3 class="accent-title">The decade of change</h3>
         <p>
           The radar chart compares total contribution by category (e.g., <b>Property</b>, <b>Violent</b>, 
           <b>Public Order</b>, <b>Drug</b>, <b>White Collar</b>, <b>Other</b>). Longer spokes mean a larger share.
-          In our data, <span class="em-red"><b>property</b> and <b>violent</b></span> spokes extend the furthest—clear evidence of 
-          their central role in overall incidence.
+          In the data, <span class="em-red"><b>property</b> and <b>violent</b></span> spokes extend the furthest—clear evidence of 
+          their central role in overall incidence. It is clear that people are commiting more extreme crimes more frequently.
         </p>
         <p>
           Note the subtle shape change across years: the polygon for <b>2022</b> stretches a little further on 
@@ -79,12 +79,12 @@
 
     <!-- VIS 5: AGE × CRIME HEATMAPS -->
     <section class="vis">
-      <h3 class="accent-title">Who is driving the change?</h3>
+      <h3 class="accent-title">Who is commiting the crimes?</h3>
       <p>
         Three heatmaps (2011, 2016, 2022) compare <b>age groups</b> against <b>crime types</b> using <b>% of total</b>. 
         The pattern shows a <span class="em-red"><b>growing share from youth</b></span>—especially 
-        <b>Under 18</b> and <b>18–25</b>—in <b>violent</b> and <b>property</b> offences by 2022. Tooltips provide both percentage 
-        and an estimated count (based on total annual incidents) to ground the narrative with scale.
+        <b>Under 18</b> and <b>18–25</b>—in <b>violent</b> and <b>property</b> offences by 2022. Highlighting text and delving deeper, provide both percentage 
+        and total numbers of crimes committed. It is evidengt <b>youth crime</b> is a growing problem
       </p>
       <div class="scroll-wrap">
         <div id="vis5" class="vis-container" style="min-width: 1150px;"></div>
@@ -93,7 +93,7 @@
 
     <!-- CONCLUSION -->
     <section class="conclusion">
-      <h3 class="accent-title">So what?</h3>
+      <h3 class="accent-title">Take away about Crime</h3>
       <p>
         Crime in South Australia remains anchored by <b>property</b> and <b>violent</b> categories and is 
         geographically concentrated in <b>major population centres</b>. By 2022, the evidence suggests a 
@@ -103,9 +103,15 @@
       </p>
     </section>
 
-    <footer>
-      <p>Data Source: South Australia Police &nbsp;|&nbsp; Visualisations created using Vega-Lite</p>
-    </footer>
+    <p>
+      Data Source: 
+      <a href="https://data.sa.gov.au/data/dataset/crime-statistics" 
+        target="_blank" 
+        style="color: #004aad; text-decoration: underline; font-weight: 600;">
+        South Australia Police Crime Statistics
+      </a> 
+      &nbsp;|&nbsp; Visualisations created using Vega-Lite
+    </p>
   </main>
 
   <!-- === Vega Embed Scripts === -->
