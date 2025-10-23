@@ -1,47 +1,125 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Top 8 South Australian Suburbs by Crime (2022)",
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 500,
   "height": 500,
   "background": "#f9f9f9",
-
-  "data": {
-    "values": [
-      {"Suburb": "ADELAIDE", "Crimes": 3674},
-      {"Suburb": "PORT AUGUSTA", "Crimes": 1092},
-      {"Suburb": "PORT LINCOLN", "Crimes": 999},
-      {"Suburb": "MORPHETT VALE", "Crimes": 769},
-      {"Suburb": "SALISBURY", "Crimes": 759},
-      {"Suburb": "MOUNT GAMBIER", "Crimes": 727},
-      {"Suburb": "ELIZABETH", "Crimes": 723}
-    ]
+  "title": {
+    "text": "South Australia Crime Composition — 2011 vs 2022",
+    "fontSize": 16,
+    "anchor": "middle"
   },
 
-  "encoding": {
-    "theta": {"field": "Suburb", "type": "nominal", "sort": null},
-    "radius": {
-      "field": "Crimes",
-      "type": "quantitative",
-      "scale": {"nice": true},
-      "title": "Crime Count"
-    },
-    "color": {"value": "#D32F2F"}
-  },
+  "data": [
+    {
+      "name": "crime",
+      "values": [
+        {"Year": 2011, "Type": "Theft & Property", "Crimes": 9500},
+        {"Year": 2011, "Type": "Assault & Violence", "Crimes": 4100},
+        {"Year": 2011, "Type": "Drug Offences", "Crimes": 1900},
+        {"Year": 2011, "Type": "Fraud & Deception", "Crimes": 1600},
+        {"Year": 2011, "Type": "Sexual Offences", "Crimes": 800},
+        {"Year": 2011, "Type": "Public Order Offences", "Crimes": 2300},
+        {"Year": 2011, "Type": "Other", "Crimes": 1200},
 
-  "layer": [
-    {
-      "mark": {"type": "line", "interpolate": "linear-closed", "strokeWidth": 2}
-    },
-    {
-      "mark": {"type": "point", "filled": true, "size": 80},
-      "encoding": {
-        "tooltip": [
-          {"field": "Suburb", "type": "nominal"},
-          {"field": "Crimes", "type": "quantitative", "format": ","}
-        ]
-      }
+        {"Year": 2022, "Type": "Theft & Property", "Crimes": 7200},
+        {"Year": 2022, "Type": "Assault & Violence", "Crimes": 5300},
+        {"Year": 2022, "Type": "Drug Offences", "Crimes": 3100},
+        {"Year": 2022, "Type": "Fraud & Deception", "Crimes": 2400},
+        {"Year": 2022, "Type": "Sexual Offences", "Crimes": 950},
+        {"Year": 2022, "Type": "Public Order Offences", "Crimes": 1800},
+        {"Year": 2022, "Type": "Other", "Crimes": 1300}
+      ]
     }
   ],
 
-  "view": {"stroke": null}
+  "signals": [
+    {"name": "cx", "value": 250},
+    {"name": "cy", "value": 250},
+    {"name": "maxRadius", "value": 200},
+    {"name": "angleStep", "value": 0.89759714285}
+  ],
+
+  "scales": [
+    {
+      "name": "rscale",
+      "type": "linear",
+      "domain": [0, 10000],
+      "range": [0, {"signal": "maxRadius"}]
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [2011, 2022],
+      "range": ["#1976D2", "#D32F2F"]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "group",
+      "encode": {"enter": {"x": {"signal": "cx"}, "y": {"signal": "cy"}}},
+      "marks": [
+        {
+          "type": "line",
+          "from": {"facet": {"data": "crime", "name": "yearFacet", "groupby": ["Year"]}},
+          "encode": {
+            "enter": {
+              "stroke": {"scale": "color", "field": "Year"},
+              "strokeWidth": {"value": 2},
+              "fill": {"scale": "color", "field": "Year"},
+              "fillOpacity": {"value": 0.25}
+            }
+          },
+          "transform": [
+            {
+              "type": "formula",
+              "as": "angleIndex",
+              "expr": "datum.Type=='Theft & Property'?0:datum.Type=='Assault & Violence'?1:datum.Type=='Drug Offences'?2:datum.Type=='Fraud & Deception'?3:datum.Type=='Sexual Offences'?4:datum.Type=='Public Order Offences'?5:6"
+            },
+            {
+              "type": "formula",
+              "as": "angle",
+              "expr": "angleIndex * angleStep"
+            },
+            {
+              "type": "formula",
+              "as": "radius",
+              "expr": "scale('rscale', datum.Crimes)"
+            },
+            {"type": "formula", "as": "x", "expr": "cx + radius * cos(angle)"},
+            {"type": "formula", "as": "y", "expr": "cy + radius * sin(angle)"},
+            {"type": "line", "sort": {"field": "angle"}}
+          ]
+        },
+        {
+          "type": "text",
+          "encode": {
+            "enter": {
+              "x": {
+                "signal": "cx + (maxRadius + 15) * cos(datum.index * angleStep)"
+              },
+              "y": {
+                "signal": "cy + (maxRadius + 15) * sin(datum.index * angleStep)"
+              },
+              "text": {"field": "Type"},
+              "align": {"value": "center"},
+              "baseline": {"value": "middle"},
+              "fontSize": {"value": 11}
+            }
+          },
+          "transform": [
+            {
+              "type": "sequence",
+              "start": 0,
+              "stop": 7,
+              "step": 1,
+              "as": "index"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "legends": [{"fill": "color", "orient": "bottom", "title": "Year"}]
 }
