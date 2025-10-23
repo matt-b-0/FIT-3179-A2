@@ -28,7 +28,7 @@
       "view": {"stroke": null},
       "projection": {
         "type": "equirectangular",
-        "center": [138.2, -34.9],
+        "center": [138.4, -34.9],
         "scale": {"expr": "zoom_level"}
       },
       "layer": [
