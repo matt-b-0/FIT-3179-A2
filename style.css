@@ -74,6 +74,24 @@ iframe {
   max-width: 900px;
 }
 
+/* === Vega Visualisation Containers === */
+.vis-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  padding: 0; /* remove side padding inside sections */
+  margin: 1em 0;
+}
+
+section.vis {
+  padding: 2em 3%; /* reduce section padding for more width */
+}
+
+main {
+  max-width: 95vw; /* allow the page to grow with screen width */
+}
+
 /* === Footer === */
 footer {
   text-align: center;
