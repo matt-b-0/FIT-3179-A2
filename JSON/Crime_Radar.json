@@ -1,125 +1,222 @@
 {
-  "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 500,
-  "height": 500,
-  "background": "#f9f9f9",
-  "title": {
-    "text": "South Australia Crime Composition — 2011 vs 2022",
-    "fontSize": 16,
-    "anchor": "middle"
-  },
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "South Australia Crime Composition Comparison — 2011 vs 2022 (Aligned Spider Grid)",
+  "width": 450,
+  "height": 450,
+  "padding": 55,
+  "autosize": {"type": "none", "contains": "padding"},
+
+  "signals": [
+    {"name": "radius", "update": "width / 2.4"},
+    {"name": "grid_steps", "value": 5}
+  ],
 
   "data": [
     {
-      "name": "crime",
+      "name": "table",
       "values": [
-        {"Year": 2011, "Type": "Theft & Property", "Crimes": 9500},
-        {"Year": 2011, "Type": "Assault & Violence", "Crimes": 4100},
-        {"Year": 2011, "Type": "Drug Offences", "Crimes": 1900},
-        {"Year": 2011, "Type": "Fraud & Deception", "Crimes": 1600},
-        {"Year": 2011, "Type": "Sexual Offences", "Crimes": 800},
-        {"Year": 2011, "Type": "Public Order Offences", "Crimes": 2300},
-        {"Year": 2011, "Type": "Other", "Crimes": 1200},
-
-        {"Year": 2022, "Type": "Theft & Property", "Crimes": 7200},
-        {"Year": 2022, "Type": "Assault & Violence", "Crimes": 5300},
-        {"Year": 2022, "Type": "Drug Offences", "Crimes": 3100},
-        {"Year": 2022, "Type": "Fraud & Deception", "Crimes": 2400},
-        {"Year": 2022, "Type": "Sexual Offences", "Crimes": 950},
-        {"Year": 2022, "Type": "Public Order Offences", "Crimes": 1800},
-        {"Year": 2022, "Type": "Other", "Crimes": 1300}
+        {"key": "Drug", "value": 2755, "year": "2011"},
+        {"key": "Other", "value": 1228, "year": "2011"},
+        {"key": "Property", "value": 6070, "year": "2011"},
+        {"key": "Public Order", "value": 3108, "year": "2011"},
+        {"key": "Violent", "value": 4818, "year": "2011"},
+        {"key": "White Collar", "value": 1784, "year": "2011"},
+        {"key": "Drug", "value": 4757, "year": "2022"},
+        {"key": "Other", "value": 2362, "year": "2022"},
+        {"key": "Property", "value": 10473, "year": "2022"},
+        {"key": "Public Order", "value": 4545, "year": "2022"},
+        {"key": "Violent", "value": 8631, "year": "2022"},
+        {"key": "White Collar", "value": 2198, "year": "2022"}
+      ]
+    },
+    {
+      "name": "keys",
+      "source": "table",
+      "transform": [{"type": "aggregate", "groupby": ["key"]}]
+    },
+    {
+      "name": "grid_rings",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": 0,
+          "stop": {"signal": "max(data('table').value)"},
+          "step": {"signal": "max(data('table').value) / grid_steps"}
+        },
+        {"type": "formula", "as": "r", "expr": "datum.data"}
+      ]
+    },
+    {
+      "name": "ring_points",
+      "source": "grid_rings",
+      "transform": [
+        {
+          "type": "sequence",
+          "start": {"signal": "-PI/2"},
+          "stop": {"signal": "1.5*PI"},
+          "step": {"signal": "PI/3"},
+          "as": "angle"
+        },
+        {"type": "formula", "as": "x", "expr": "scale('radial', datum.r) * cos(datum.angle)"},
+        {"type": "formula", "as": "y", "expr": "scale('radial', datum.r) * sin(datum.angle)"}
+      ]
+    },
+    {
+      "name": "outer_ring",
+      "values": [
+        {"angle": -1.5708},
+        {"angle": -0.5236},
+        {"angle": 0.5236},
+        {"angle": 1.5708},
+        {"angle": 2.6179},
+        {"angle": 3.6652},
+        {"angle": -1.5708}
+      ],
+      "transform": [
+        {"type": "formula", "as": "x", "expr": "radius * cos(datum.angle)"},
+        {"type": "formula", "as": "y", "expr": "radius * sin(datum.angle)"}
       ]
     }
   ],
 
-  "signals": [
-    {"name": "cx", "value": 250},
-    {"name": "cy", "value": 250},
-    {"name": "maxRadius", "value": 200},
-    {"name": "angleStep", "value": 0.89759714285}
-  ],
-
   "scales": [
     {
-      "name": "rscale",
+      "name": "angular",
+      "type": "point",
+      "range": {"signal": "[-PI/2, 1.5*PI]"},
+      "padding": 0.5,
+      "domain": [
+        "Drug",
+        "Other",
+        "Property",
+        "Public Order",
+        "Violent",
+        "White Collar"
+      ]
+    },
+    {
+      "name": "radial",
       "type": "linear",
-      "domain": [0, 10000],
-      "range": [0, {"signal": "maxRadius"}]
+      "range": {"signal": "[0, radius]"},
+      "domain": {"data": "table", "field": "value"}
     },
     {
       "name": "color",
       "type": "ordinal",
-      "domain": [2011, 2022],
-      "range": ["#1976D2", "#D32F2F"]
+      "domain": ["2011", "2022"],
+      "range": ["#004aad", "#d73027"]
     }
   ],
 
   "marks": [
     {
+      "type": "line",
+      "from": {"data": "ring_points"},
+      "encode": {
+        "enter": {
+          "interpolate": {"value": "linear-closed"},
+          "x": {"signal": "radius + datum.x"},
+          "y": {"signal": "radius + datum.y"},
+          "stroke": {"value": "#e0e0e0"},
+          "strokeWidth": {"value": 1}
+        }
+      }
+    },
+
+    {
+      "type": "line",
+      "from": {"data": "outer_ring"},
+      "encode": {
+        "enter": {
+          "interpolate": {"value": "linear-closed"},
+          "x": {"signal": "radius + datum.x"},
+          "y": {"signal": "radius + datum.y"},
+          "stroke": {"value": "#b0b0b0"},
+          "strokeWidth": {"value": 2}
+        }
+      }
+    },
+
+    {
+      "type": "rule",
+      "from": {"data": "keys"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "radius"},
+          "y": {"signal": "radius"},
+          "x2": {"signal": "radius + radius * cos(scale('angular', datum.key))"},
+          "y2": {"signal": "radius + radius * sin(scale('angular', datum.key))"},
+          "stroke": {"value": "#cccccc"},
+          "strokeWidth": {"value": 1}
+        }
+      }
+    },
+
+    {
       "type": "group",
-      "encode": {"enter": {"x": {"signal": "cx"}, "y": {"signal": "cy"}}},
+      "from": {"facet": {"data": "table", "name": "facet", "groupby": ["year"]}},
+      "encode": {"enter": {"x": {"signal": "radius"}, "y": {"signal": "radius"}}},
       "marks": [
         {
           "type": "line",
-          "from": {"facet": {"data": "crime", "name": "yearFacet", "groupby": ["Year"]}},
+          "from": {"data": "facet"},
           "encode": {
             "enter": {
-              "stroke": {"scale": "color", "field": "Year"},
+              "interpolate": {"value": "linear-closed"},
+              "x": {"signal": "scale('radial', datum.value) * cos(scale('angular', datum.key))"},
+              "y": {"signal": "scale('radial', datum.value) * sin(scale('angular', datum.key))"},
+              "stroke": {"scale": "color", "field": "year"},
               "strokeWidth": {"value": 2},
-              "fill": {"scale": "color", "field": "Year"},
-              "fillOpacity": {"value": 0.25}
+              "fill": {"scale": "color", "field": "year"},
+              "fillOpacity": {"value": 0.15}
             }
-          },
-          "transform": [
-            {
-              "type": "formula",
-              "as": "angleIndex",
-              "expr": "datum.Type=='Theft & Property'?0:datum.Type=='Assault & Violence'?1:datum.Type=='Drug Offences'?2:datum.Type=='Fraud & Deception'?3:datum.Type=='Sexual Offences'?4:datum.Type=='Public Order Offences'?5:6"
-            },
-            {
-              "type": "formula",
-              "as": "angle",
-              "expr": "angleIndex * angleStep"
-            },
-            {
-              "type": "formula",
-              "as": "radius",
-              "expr": "scale('rscale', datum.Crimes)"
-            },
-            {"type": "formula", "as": "x", "expr": "cx + radius * cos(angle)"},
-            {"type": "formula", "as": "y", "expr": "cy + radius * sin(angle)"},
-            {"type": "line", "sort": {"field": "angle"}}
-          ]
+          }
         },
         {
           "type": "text",
+          "from": {"data": "facet"},
           "encode": {
             "enter": {
-              "x": {
-                "signal": "cx + (maxRadius + 15) * cos(datum.index * angleStep)"
-              },
-              "y": {
-                "signal": "cy + (maxRadius + 15) * sin(datum.index * angleStep)"
-              },
-              "text": {"field": "Type"},
+              "x": {"signal": "scale('radial', datum.value) * cos(scale('angular', datum.key))"},
+              "y": {"signal": "scale('radial', datum.value) * sin(scale('angular', datum.key))"},
+              "text": {"signal": "format(datum.value, ',')"},
               "align": {"value": "center"},
               "baseline": {"value": "middle"},
-              "fontSize": {"value": 11}
+              "fontSize": {"value": 10},
+              "fill": {"value": "black"}
             }
-          },
-          "transform": [
-            {
-              "type": "sequence",
-              "start": 0,
-              "stop": 7,
-              "step": 1,
-              "as": "index"
-            }
-          ]
+          }
         }
       ]
+    },
+
+    {
+      "type": "text",
+      "from": {"data": "keys"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "radius + (radius + 35) * cos(scale('angular', datum.key))"},
+          "y": {"signal": "radius + (radius + 35) * sin(scale('angular', datum.key))"},
+          "text": {"field": "key"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"value": 11},
+          "fill": {"value": "black"},
+          "fontWeight": {"value": "bold"}
+        }
+      }
     }
   ],
 
-  "legends": [{"fill": "color", "orient": "bottom", "title": "Year"}]
+  "legends": [
+    {
+      "fill": "color",
+      "orient": "bottom",
+      "title": "Year",
+      "direction": "horizontal",
+      "symbolType": "circle",
+      "symbolSize": 120,
+      "offset": 10
+    }
+  ]
 }
